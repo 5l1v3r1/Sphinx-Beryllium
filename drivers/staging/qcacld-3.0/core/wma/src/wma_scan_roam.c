@@ -3197,6 +3197,7 @@ QDF_STATUS wma_roam_scan_fill_self_caps(tp_wma_handle wma_handle,
 			  "Failed to get WNI_CFG_11G_SHORT_SLOT_TIME_ENABLED");
 		return QDF_STATUS_E_FAILURE;
 	}
+	selfCaps.shortSlotTime = 0;
 	if (val)
 		selfCaps.shortSlotTime = 1;
 	if (wlan_cfg_get_int(pMac, WNI_CFG_11H_ENABLED, &val) !=
@@ -3205,6 +3206,7 @@ QDF_STATUS wma_roam_scan_fill_self_caps(tp_wma_handle wma_handle,
 			  "Failed to get WNI_CFG_11H_ENABLED");
 		return QDF_STATUS_E_FAILURE;
 	}
+	selfCaps.spectrumMgt = 0;
 	if (val)
 		selfCaps.spectrumMgt = 1;
 	if (wlan_cfg_get_int(pMac, WNI_CFG_QOS_ENABLED, &val) !=
@@ -3213,6 +3215,7 @@ QDF_STATUS wma_roam_scan_fill_self_caps(tp_wma_handle wma_handle,
 			  "Failed to get WNI_CFG_QOS_ENABLED");
 		return QDF_STATUS_E_FAILURE;
 	}
+	selfCaps.qos = 0;
 	if (val)
 		selfCaps.qos = 1;
 	if (wlan_cfg_get_int(pMac, WNI_CFG_APSD_ENABLED, &val) !=
@@ -3221,9 +3224,9 @@ QDF_STATUS wma_roam_scan_fill_self_caps(tp_wma_handle wma_handle,
 			  "Failed to get WNI_CFG_APSD_ENABLED");
 		return QDF_STATUS_E_FAILURE;
 	}
+	selfCaps.apsd = 0;
 	if (val)
 		selfCaps.apsd = 1;
-
 	selfCaps.rrm = pMac->rrm.rrmSmeContext.rrmConfig.rrm_enabled;
 
 	if (wlan_cfg_get_int(pMac, WNI_CFG_BLOCK_ACK_ENABLED, &val) !=
